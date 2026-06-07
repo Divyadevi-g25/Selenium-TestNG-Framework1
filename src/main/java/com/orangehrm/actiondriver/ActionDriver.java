@@ -253,7 +253,7 @@ public class ActionDriver {
 	}
 
 	// wait for Element to be clickable
-	private void waitForElementToBeClickable(By by) {
+	public void waitForElementToBeClickable(By by) {
 		try {
 			wait.until(ExpectedConditions.elementToBeClickable(by));
 		} catch (Exception e) {

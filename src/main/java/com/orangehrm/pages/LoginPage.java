@@ -16,7 +16,8 @@ public class LoginPage {
 	private By passwordField = By.cssSelector("input[type='password']");
 	//button xpath //*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button
 	//to reduce the xpath length, we can use the same xpath as simple as below
-	private By loginButton = By.xpath("//button[text() = 'Login']");
+	//private By loginButton = By.xpath("//button[text() = 'Login']");
+	private By loginButton = By.xpath("//button[@type='submit']");
 	private By errorMessage = By.xpath("//p[text()='Invalid credentials']");    //*[@id=\"app\"]/div[1]/div/div[1]/div/div[2]/div[2]/div/div[1]/div[1]/p
 	
 	//To initialize action driver object, by passing webdriver instance
@@ -31,9 +32,11 @@ public class LoginPage {
 	
 	//Method to perform login
 	public void login(String userName, String password) {
-		actionDriver.enterText(userNameField, userName);
+		
 		actionDriver.waitForElementToBeVisible(userNameField);
+		actionDriver.enterText(userNameField, userName);
 		actionDriver.enterText(passwordField, password);
+		actionDriver.waitForElementToBeClickable(loginButton);
 		actionDriver.click(loginButton);
 	}
 	
