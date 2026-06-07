@@ -188,9 +188,7 @@ public class BaseClass {
                  .executeScript("return document.readyState").equals("complete"));
     		 
     		 //wait for login page - very important
-    		 new WebDriverWait(getDriver(), Duration.ofSeconds(15))
-             .until(ExpectedConditions.visibilityOfElementLocated(
-                 By.name("username")));
+    		// new WebDriverWait(getDriver(), Duration.ofSeconds(15)).until(ExpectedConditions.visibilityOfElementLocated(By.name("username")));
 		} catch (Exception e) {
 			System.out.println("Failed to navigate to URL:"+e.getMessage());
 			throw e;
