@@ -25,8 +25,8 @@ public class ActionDriver {
 	// initialize the variables
 	public ActionDriver(WebDriver driver) {
 		this.driver = driver;
-		int explicitWait = Integer.parseInt(BaseClass.getProp().getProperty("explicitWait"));
-		this.wait = new WebDriverWait(driver, Duration.ofSeconds(explicitWait));
+		//int explicitWait = Integer.parseInt(BaseClass.getProp().getProperty("explicitWait"));
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 		logger.info("Webdriver instance is created");
 	}
 
