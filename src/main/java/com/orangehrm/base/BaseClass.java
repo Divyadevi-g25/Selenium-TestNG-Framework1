@@ -107,7 +107,7 @@ public class BaseClass {
     		
     		//Create ChromeOptions
     		ChromeOptions options = new ChromeOptions();
-    		 boolean isHeadless = false;
+    		boolean isHeadless = Boolean.parseBoolean(prop.getProperty("headless"));
 			 if (isHeadless) {
     		        options.addArguments("--headless=new"); //Run chrome in headless mode
     		        options.addArguments("--window-size=1920,1080"); //set window size
