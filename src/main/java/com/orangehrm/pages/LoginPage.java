@@ -12,7 +12,7 @@ public class LoginPage {
 	
 	//Define locators using By Class
 	
-	private By userNameField = By.xpath("//input[@placeholder='Username']");
+	private By userNameField = By.xpath("//input[@name='username']");
 	private By passwordField = By.cssSelector("input[type='password']");
 	//button xpath //*[@id="app"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button
 	//to reduce the xpath length, we can use the same xpath as simple as below
@@ -32,6 +32,7 @@ public class LoginPage {
 	//Method to perform login
 	public void login(String userName, String password) {
 		actionDriver.enterText(userNameField, userName);
+		actionDriver.waitForElementToBeVisible(userNameField);
 		actionDriver.enterText(passwordField, password);
 		actionDriver.click(loginButton);
 	}
