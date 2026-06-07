@@ -8,6 +8,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.LockSupport;
 
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -15,6 +17,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -167,8 +171,8 @@ public class BaseClass {
 	private void configureBrowser() {
 	
 		//ImplicitWait - global wait
-    	int implicitWait = Integer.parseInt(prop.getProperty("implicitWait"));
-    	getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(implicitWait));
+    	//int implicitWait = Integer.parseInt(prop.getProperty("implicitWait"));
+    	getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(0));
     	
     	//maximize browser
     	
@@ -178,8 +182,18 @@ public class BaseClass {
     	
     	try {
     		getDriver().get(prop.getProperty("url"));
+    		//wait for page load
+    		 new WebDriverWait(getDriver(), Duration.ofSeconds(20))
+             .until(webDriver -> ((JavascriptExecutor) webDriver)
+                 .executeScript("return document.readyState").equals("complete"));
+    		 
+    		 //wait for login page - very important
+    		 new WebDriverWait(getDriver(), Duration.ofSeconds(15))
+             .until(ExpectedConditions.visibilityOfElementLocated(
+                 By.name("username")));
 		} catch (Exception e) {
 			System.out.println("Failed to navigate to URL:"+e.getMessage());
+			throw e;
 		}
 		
 	}

@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<suite name="OrangeHRMSuite" parallel="classes" thread-count="7">
+<suite name="OrangeHRMSuite" parallel="tests" thread-count="3">
 	<listeners>
 		<listener class-name="com.orangehrm.listeners.TestListener"></listener>
 	</listeners>
-	<parameter name="headless" value="true"/>
-	<test name="OrangeHRMTest">
+
+	<parameter name="headless" value="true" />
+
+	<!-- UI tests-->
+	<test name="UI tests" parallel="classes" thread-count="2">
 		<classes>
-			<class name="com.orangehrm.test.DummyTest"></class>
-			<class name="com.orangehrm.test.DummyTest2"></class>
 			<class name="com.orangehrm.test.HomePageTest"></class>
 			<class name="com.orangehrm.test.LoginPageTest"></class>
+		</classes>
+	</test>
+
+	<!-- DB tests-->
+	<test name="DB Tests" parallel="false">
+		<classes>
 			<class name="com.orangehrm.test.DBVerificationTest"></class>
+		</classes>
+
+	</test>
+
+	<!-- API tests-->
+	<test name="API Tests" parallel="false">
+		<classes>
 			<class name="com.orangehrm.test.ApiTest"></class>
 		</classes>
+
 	</test>
 </suite>
