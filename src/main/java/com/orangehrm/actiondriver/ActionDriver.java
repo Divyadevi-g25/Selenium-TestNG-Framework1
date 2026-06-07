@@ -21,6 +21,7 @@ public class ActionDriver {
 	private WebDriverWait wait;
 	public static final Logger logger = BaseClass.logger; // Instance of logger class
 
+	//Test checking
 	// constructor
 	// initialize the variables
 	public ActionDriver(WebDriver driver) {
